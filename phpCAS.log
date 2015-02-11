@@ -1,0 +1,201 @@
+6DB8 .START phpCAS-1.3.3 ****************** [CAS.php:438]
+6DB8 .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+6DB8 .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+6DB8 .|    |    Starting a new session 7iirjr7qq0882jnotd5qsku3d7 [Client.php:906]
+6DB8 .|    <= ''
+6DB8 .<= ''
+6DB8 .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+6DB8 .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+6DB8 .<= ''
+6DB8 .=> phpCAS::checkAuthentication() [fonctions.php:22]
+6DB8 .|    => CAS_Client::checkAuthentication() [CAS.php:995]
+6DB8 .|    |    => CAS_Client::isAuthenticated() [Client.php:1296]
+6DB8 .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+6DB8 .|    |    |    |    no user found [Client.php:1592]
+6DB8 .|    |    |    <= false
+6DB8 .|    |    |    no ticket found [Client.php:1453]
+6DB8 .|    |    <= false
+6DB8 .|    |    user is not authenticated (cache reset) [Client.php:1334]
+6DB8 .|    |    => CAS_Client::redirectToCas(true) [Client.php:1335]
+6DB8 .|    |    |    => CAS_Client::getServerLoginURL(true, false) [Client.php:1613]
+6DB8 .|    |    |    |    => CAS_Client::getURL() [Client.php:342]
+6DB8 .|    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+6DB8 .|    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+6DB8 .|    |    |    <= 'https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS&gateway=true'
+6DB8 .|    |    |    Redirect to : https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS&gateway=true [Client.php:1620]
+6DB8 .|    |    |    exit()
+6DB8 .|    |    |    -
+6DB8 .|    |    -
+6DB8 .|    -
+FD5F .START phpCAS-1.3.3 ****************** [CAS.php:438]
+FD5F .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+FD5F .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+FD5F .|    |    Starting a new session 7iirjr7qq0882jnotd5qsku3d7 [Client.php:906]
+FD5F .|    <= ''
+FD5F .<= ''
+FD5F .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+FD5F .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+FD5F .<= ''
+FD5F .=> phpCAS::checkAuthentication() [fonctions.php:22]
+FD5F .|    => CAS_Client::checkAuthentication() [CAS.php:995]
+FD5F .|    |    => CAS_Client::isAuthenticated() [Client.php:1296]
+FD5F .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+FD5F .|    |    |    |    no user found [Client.php:1592]
+FD5F .|    |    |    <= false
+FD5F .|    |    |    no ticket found [Client.php:1453]
+FD5F .|    |    <= false
+FD5F .|    <= false
+FD5F .<= false
+FD5F .=> phpCAS::forceAuthentication() [fonctions.php:27]
+FD5F .|    => CAS_Client::forceAuthentication() [CAS.php:1015]
+FD5F .|    |    => CAS_Client::isAuthenticated() [Client.php:1245]
+FD5F .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+FD5F .|    |    |    |    no user found [Client.php:1592]
+FD5F .|    |    |    <= false
+FD5F .|    |    |    no ticket found [Client.php:1453]
+FD5F .|    |    <= false
+FD5F .|    |    => CAS_Client::redirectToCas(false) [Client.php:1254]
+FD5F .|    |    |    => CAS_Client::getServerLoginURL(false, false) [Client.php:1613]
+FD5F .|    |    |    |    => CAS_Client::getURL() [Client.php:342]
+FD5F .|    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+FD5F .|    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+FD5F .|    |    |    <= 'https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS'
+FD5F .|    |    |    Redirect to : https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS [Client.php:1620]
+FD5F .|    |    |    exit()
+FD5F .|    |    |    -
+FD5F .|    |    -
+FD5F .|    -
+D5AA .START phpCAS-1.3.3 ****************** [CAS.php:438]
+D5AA .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+D5AA .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+D5AA .|    |    Starting a new session 7iirjr7qq0882jnotd5qsku3d7 [Client.php:906]
+D5AA .|    |    Ticket 'ST-cf64ebd6d6e8cbf9ecd0c52578f71b5b' found [Client.php:988]
+D5AA .|    <= ''
+D5AA .<= ''
+D5AA .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+D5AA .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+D5AA .<= ''
+D5AA .=> phpCAS::checkAuthentication() [fonctions.php:22]
+D5AA .|    => CAS_Client::checkAuthentication() [CAS.php:995]
+D5AA .|    |    => CAS_Client::isAuthenticated() [Client.php:1296]
+D5AA .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+D5AA .|    |    |    |    no user found [Client.php:1592]
+D5AA .|    |    |    <= false
+D5AA .|    |    |    CAS 2.0 ticket `ST-cf64ebd6d6e8cbf9ecd0c52578f71b5b' is present [Client.php:1406]
+D5AA .|    |    |    => CAS_Client::validateCAS20('', NULL, NULL) [Client.php:1409]
+D5AA .|    |    |    |     [Client.php:3101]
+D5AA .|    |    |    |    => CAS_Client::getServerServiceValidateURL() [Client.php:3108]
+D5AA .|    |    |    |    |    => CAS_Client::getURL() [Client.php:453]
+D5AA .|    |    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+D5AA .|    |    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+D5AA .|    |    |    |    <= 'https://cas.unilim.fr/cas/serviceValidate?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS'
+D5AA .|    |    |    |    => CAS_Client::_readURL('https://cas.unilim.fr/cas/serviceValidate?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS&ticket=ST-cf64ebd6d6e8cbf9ecd0c52578f71b5b', NULL, NULL, NULL) [Client.php:3118]
+D5AA .|    |    |    |    |    => CAS_Request_CurlRequest::sendRequest() [AbstractRequest.php:242]
+6217 .START phpCAS-1.3.3 ****************** [CAS.php:438]
+6217 .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+6217 .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+6217 .|    |    Starting a new session gjfcd76rb4rskqqrrk82hh0s46 [Client.php:906]
+6217 .|    <= ''
+6217 .<= ''
+6217 .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+6217 .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+6217 .<= ''
+6217 .=> phpCAS::forceAuthentication() [fonctions.php:27]
+6217 .|    => CAS_Client::forceAuthentication() [CAS.php:1015]
+6217 .|    |    => CAS_Client::isAuthenticated() [Client.php:1245]
+6217 .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+6217 .|    |    |    |    no user found [Client.php:1592]
+6217 .|    |    |    <= false
+6217 .|    |    |    no ticket found [Client.php:1453]
+6217 .|    |    <= false
+6217 .|    |    => CAS_Client::redirectToCas(false) [Client.php:1254]
+6217 .|    |    |    => CAS_Client::getServerLoginURL(false, false) [Client.php:1613]
+6217 .|    |    |    |    => CAS_Client::getURL() [Client.php:342]
+6217 .|    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+6217 .|    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+6217 .|    |    |    <= 'https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS'
+6217 .|    |    |    Redirect to : https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS [Client.php:1620]
+6217 .|    |    |    exit()
+6217 .|    |    |    -
+6217 .|    |    -
+6217 .|    -
+EF01 .START phpCAS-1.3.3 ****************** [CAS.php:438]
+EF01 .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+EF01 .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+EF01 .|    |    Starting a new session gjfcd76rb4rskqqrrk82hh0s46 [Client.php:906]
+EF01 .|    |    Ticket 'ST-8c0594560d7442b3bb3af12c6704adf9' found [Client.php:988]
+EF01 .|    <= ''
+EF01 .<= ''
+EF01 .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+EF01 .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+EF01 .<= ''
+EF01 .=> phpCAS::forceAuthentication() [fonctions.php:27]
+EF01 .|    => CAS_Client::forceAuthentication() [CAS.php:1015]
+EF01 .|    |    => CAS_Client::isAuthenticated() [Client.php:1245]
+EF01 .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+EF01 .|    |    |    |    no user found [Client.php:1592]
+EF01 .|    |    |    <= false
+EF01 .|    |    |    CAS 2.0 ticket `ST-8c0594560d7442b3bb3af12c6704adf9' is present [Client.php:1406]
+EF01 .|    |    |    => CAS_Client::validateCAS20('', NULL, NULL) [Client.php:1409]
+EF01 .|    |    |    |     [Client.php:3101]
+EF01 .|    |    |    |    => CAS_Client::getServerServiceValidateURL() [Client.php:3108]
+EF01 .|    |    |    |    |    => CAS_Client::getURL() [Client.php:453]
+EF01 .|    |    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+EF01 .|    |    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+EF01 .|    |    |    |    <= 'https://cas.unilim.fr/cas/serviceValidate?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS'
+EF01 .|    |    |    |    => CAS_Client::_readURL('https://cas.unilim.fr/cas/serviceValidate?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS&ticket=ST-8c0594560d7442b3bb3af12c6704adf9', NULL, NULL, NULL) [Client.php:3118]
+EF01 .|    |    |    |    |    => CAS_Request_CurlRequest::sendRequest() [AbstractRequest.php:242]
+89C1 .START phpCAS-1.3.3 ****************** [CAS.php:438]
+89C1 .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+89C1 .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+89C1 .|    |    Starting a new session qk7s8qhonbq1ocgg7ls0c30u14 [Client.php:906]
+89C1 .|    <= ''
+89C1 .<= ''
+89C1 .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+89C1 .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+89C1 .<= ''
+89C1 .=> phpCAS::forceAuthentication() [fonctions.php:27]
+89C1 .|    => CAS_Client::forceAuthentication() [CAS.php:1015]
+89C1 .|    |    => CAS_Client::isAuthenticated() [Client.php:1245]
+89C1 .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+89C1 .|    |    |    |    no user found [Client.php:1592]
+89C1 .|    |    |    <= false
+89C1 .|    |    |    no ticket found [Client.php:1453]
+89C1 .|    |    <= false
+89C1 .|    |    => CAS_Client::redirectToCas(false) [Client.php:1254]
+89C1 .|    |    |    => CAS_Client::getServerLoginURL(false, false) [Client.php:1613]
+89C1 .|    |    |    |    => CAS_Client::getURL() [Client.php:342]
+89C1 .|    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+89C1 .|    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+89C1 .|    |    |    <= 'https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS'
+89C1 .|    |    |    Redirect to : https://cas.unilim.fr/cas/login?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS [Client.php:1620]
+89C1 .|    |    |    exit()
+89C1 .|    |    |    -
+89C1 .|    |    -
+89C1 .|    -
+5325 .START phpCAS-1.3.3 ****************** [CAS.php:438]
+5325 .=> phpCAS::client('2.0', 'cas.unilim.fr', 443, 'cas') [fonctions.php:13]
+5325 .|    => CAS_Client::__construct('2.0', false, 'cas.unilim.fr', 443, 'cas', true) [CAS.php:340]
+5325 .|    |    Starting a new session qk7s8qhonbq1ocgg7ls0c30u14 [Client.php:906]
+5325 .|    |    Ticket 'ST-be9cd9be7f9d0131cdd9a7f849e2d62e' found [Client.php:988]
+5325 .|    <= ''
+5325 .<= ''
+5325 .=> phpCAS::setNoCasServerValidation() [fonctions.php:17]
+5325 .|    You have configured no validation of the legitimacy of the cas server. This is not recommended for production use. [CAS.php:1553]
+5325 .<= ''
+5325 .=> phpCAS::forceAuthentication() [fonctions.php:27]
+5325 .|    => CAS_Client::forceAuthentication() [CAS.php:1015]
+5325 .|    |    => CAS_Client::isAuthenticated() [Client.php:1245]
+5325 .|    |    |    => CAS_Client::_wasPreviouslyAuthenticated() [Client.php:1356]
+5325 .|    |    |    |    no user found [Client.php:1592]
+5325 .|    |    |    <= false
+5325 .|    |    |    CAS 2.0 ticket `ST-be9cd9be7f9d0131cdd9a7f849e2d62e' is present [Client.php:1406]
+5325 .|    |    |    => CAS_Client::validateCAS20('', NULL, NULL) [Client.php:1409]
+5325 .|    |    |    |     [Client.php:3101]
+5325 .|    |    |    |    => CAS_Client::getServerServiceValidateURL() [Client.php:3108]
+5325 .|    |    |    |    |    => CAS_Client::getURL() [Client.php:453]
+5325 .|    |    |    |    |    |    Final URI: http://localhost/site_qcm/connexion.php?authCAS=CAS [Client.php:3466]
+5325 .|    |    |    |    |    <= 'http://localhost/site_qcm/connexion.php?authCAS=CAS'
+5325 .|    |    |    |    <= 'https://cas.unilim.fr/cas/serviceValidate?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS'
+5325 .|    |    |    |    => CAS_Client::_readURL('https://cas.unilim.fr/cas/serviceValidate?service=http%3A%2F%2Flocalhost%2Fsite_qcm%2Fconnexion.php%3FauthCAS%3DCAS&ticket=ST-be9cd9be7f9d0131cdd9a7f849e2d62e', NULL, NULL, NULL) [Client.php:3118]
+5325 .|    |    |    |    |    => CAS_Request_CurlRequest::sendRequest() [AbstractRequest.php:242]
