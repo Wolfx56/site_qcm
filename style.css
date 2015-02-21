@@ -1,0 +1,135 @@
+input {
+	display: block;
+}
+
+.div_question {
+	background: grey;
+	margin: 5px;
+	width: 80%;
+}
+.div_reponse input {
+	background-color: blue;
+	display: inline;
+}
+
+#page {
+	background : white;
+}
+
+.question input {
+	display: inline;
+}
+
+#banniere_haut
+{
+	width: 100%;
+	height: 32px;
+	background-color: rgb(232,84,18);
+	padding-top: 8px;
+	position: fixed;
+	z-index: 1;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+#page
+{
+	width: 90%;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	margin-right: 5%;
+	margin-left: 5%;
+	margin-top: 60px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	background-color: white;
+	position: absolute;
+	box-shadow: 0px 5px 12px black;
+}
+
+#div_lien
+{
+	text-align: right;
+	margin-right: 40px;
+	margin-bottom: 12px;
+}
+
+.lien_connexion
+{
+	font-family: trebuchet;
+	text-decoration: underline;
+	font-size: 16px;
+}
+
+.lien_connexion:link, .lien_connexion:visited
+{
+	color: white;
+}
+
+.lien_connexion:hover
+{
+	color: rgb(220,220,220);
+}
+
+.lien_connexion:active
+{
+	color: black;
+}
+
+.espacement
+{
+	margin-right: 30px;
+	font-family: trebuchet;
+	color: #FFFFFF;
+}
+
+#menu
+{
+	border: solid 2px blue;
+	background-color: #FFFFFF;
+	width: 100%;
+	margin: auto;
+	position: relative;
+	top: 38px;
+	border-right: none;
+	border-left: none;
+}
+
+body
+{
+	margin: 0;
+	background-color: rgb(220,220,220);
+}
+
+h1
+{
+	text-align: center;
+	font-size: 32px;
+	font-family: arial, georgia;
+	font-weight: bold;
+	color: rgb(232,84,18);
+	text-decoration: underline;
+}
+
+p
+{
+	text-align: center;
+}
+
+div
+{
+	margin: auto;
+}
+
+#erreur {
+	margin: 15px;
+	color: red;
+	text-align: center;
+	font-size: 15pt;
+	font-weight: bold;
+}

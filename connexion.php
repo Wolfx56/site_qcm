@@ -1,18 +1,20 @@
 <?php
 	require_once("./fonctions.php");
 
-	if (isset($_GET['authCAS'])) {
-		echo "set";
-		$login = auth_cas("http://localhost/site_qcm/connexion.php");
-		echo "set";
+	if (isset($_GET['authCAS']) || isset($_GET['logout'])) {
+		$url = "http://localhost/site_qcm/connexion.php";
+		$log = auth_cas($url);
 
-		var_dump($login);
-
-		$info = recupInfosLdap($login);
-
-		var_dump($info);
+		if (isset($_GET['authCAS'])) {
+			$info = recupInfosLdap($log);
+			var_dump($info);
+		}
 	}
+
+
 ?>
+
+
 
 <!Doctype HTML>
 
@@ -26,8 +28,15 @@
 <body>
 
 <div id="connexion">
-	<a href="http://localhost/site_qcm/connexion.php?authCAS=CAS">Connexion</a>
-
+	<?php
+		if (! isset($log)) {
+			echo '<a href="http://localhost/site_qcm/connexion.php?authCAS=CAS">Connexion</a>';
+		}
+		else {
+			echo $log;
+			echo ' <br/> <a href="http://localhost/site_qcm/connexion.php?logout=true"> Deconnexion </a>';
+		}
+	?>
 
 </div>
 
