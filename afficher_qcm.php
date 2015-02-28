@@ -22,13 +22,83 @@
 		$erreur = "Une erreur est survenue, le questionnaire n'a pas pu être affiché";
 	}
 
+	require_once("connexion_bd.php");
+
 	if (isset($_POST['submit'])) {
 		unset($_SESSION['quest']);
 		var_dump($_POST);
+
+		$nb_points = 0;
+
+		$mycpt = 1;
+
+		$compteur_rep_m = 1;
+
+		while ($mycpt <= $_POST['Nbq']) {
+			$nom_question = "Numq".$mycpt;
+			if (isset($_POST[$nom_question])) {
+				$num_question = $_POST[$nom_question];
+
+				//récupérer le type de la question
+				$requete = "SELECT Type FROM question WHERE Num_q = \"$num_question\"";
+				$reponse = $bdd->query($requete);
+				$donnees = $reponse->fetch();
+
+				//var_dump($donnees);
+
+				if ($donnees['Type'] == 1) { //radio
+					$num_reponse = $_POST[$num_question];
+
+					//requete pour savoir si la reponse est juste
+					$requete = "SELECT Juste FROM reponse WHERE Id = \"$num_reponse\"";
+					$reponse = $bdd->query($requete);
+					$donnees_r = $reponse->fetch();
+
+					if ($donnees_r['Juste'] == 1) {
+						$nb_points ++; //si la reponse est juste, on s'ajoute 1 pt
+					}					
+				}
+				else { //checkbox
+					// récupérer le nombre de réponses de la question 
+					$requete = "SELECT Count(*) FROM reponse WHERE Num_q = \"$num_question\"";
+					$reponse = $bdd->query($requete);
+					$donnees_nb_rep = $reponse->fetch();
+
+					while ($compteur_rep_m <= $donnees_nb_rep['0']) {
+						$myreponse = $num_question."+".$compteur_rep_m;
+						if (isset($_POST[$myreponse])) {// si ma reponse est défini, donc envoyée dans le formulaire on peut tester
+							$num_reponse = $_POST[$myreponse];
+
+							$requete = "SELECT Juste FROM reponse WHERE Id = \"$num_reponse\"";
+							$reponse = $bdd->query($requete);
+							$donnees_r = $reponse->fetch();
+
+							if ($donnees_r['Juste'] == 1) {
+								$nb_points += 1/$donnees_nb_rep['0']; //si la reponse est juste, on ajoute 1/nb_reponse_juste
+							}
+						}
+						$compteur_rep_m ++;
+					}
+				}// end else
+			} // end isset question
+
+			$compteur_rep_m = 1;
+			$mycpt ++;
+		} // end while question
+
+		echo "Nombre de points : ".$nb_points."<br/>";
+
+		$moyenne = $nb_points/$_POST['Nbq'] * 10;
+
+		echo "<br/>Moyenne : ".$moyenne."/10";
+
+		/*
+			Enregistrer la note à l'étudiant 
+			Vérifier si il peut répondre au questionnaire en rajoutant un champ dans la base de donnée au questionnaire
+		*/
+
 		exit();
 	}
-
-	require_once("connexion_bd.php");
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +112,11 @@
 
 <body>
 	<div id="banniere_haut">
+		<div id="logo">
+			<a href="http://localhost/site_qcm/index.php">
+				<img src="images/wolf.jpg" alt="logo_loup" id="mon_logo"/>
+			</a>
+		</div>
 		<div id="div_lien">
 			<?php
 
@@ -72,41 +147,57 @@
 			$requete = "SELECT questionnaire.Id,Titre,Intitule,Intitule_r,Type,question.Num_q,reponse.Id as rep_id FROM questionnaire NATURAL JOIN question JOIN reponse ON question.Num_q = reponse.Num_q WHERE questionnaire.Code = \"$code\" ORDER BY questionnaire.Id";
 			$reponse = $bdd->query($requete);
 
-			$ecrire_titre = 1;
-			$intit_reponse = "";
+			//$ecrire_titre = 1;
+			//$intit_question = "";
+			$nbq = 0;
 
 			echo "<form method=\"POST\" action=\"#\">";
 
-			while($donnees = $reponse->fetch()) {
-				if ($ecrire_titre) {
-					echo "<h2>".$donnees['Titre']."</h2>";
-					$ecrire_titre = 0;
-					$intit_reponse = $donnees['Intitule'];
-					echo "<h5>".$donnees['Intitule']."</h5>";
-					echo "<p>";
-				}
+			$donnees = $reponse->fetch();
 
-				if ($intit_reponse != $donnees['Intitule']) {
-					$intit_reponse = $donnees['Intitule'];
+			var_dump($donnees);
+
+			echo "<input type=\"hidden\" name=\"Titreq\" value=\"".$donnees["Id"]."\"/>";
+
+			echo "<h2>".$donnees['Titre']."</h2>"; //Affichage du titre
+
+			echo "<p>";
+			$intit_question = $donnees['Intitule']; //affichage 1ere question
+
+			$nbq++;
+
+			$num_rep = 1;
+
+			echo "<input type=\"hidden\" name=\"Numq".$nbq."\" value=\"".$donnees['Num_q']."\"/>";
+
+			do {
+
+				if ($intit_question != $donnees['Intitule']) {
+					$nbq++;
+					$num_rep = 1;
+					echo "<input type=\"hidden\" name=\"Numq".$nbq."\" value=\"".$donnees['Num_q']."\"/>";
+					$intit_question = $donnees['Intitule'];
 					echo "</p>"; //on sort de la question précédente
-					echo "<h5>".$donnees['Intitule']."</h5>";
+					echo "<h5>".$donnees['Intitule']."</h5>"; //Affichage de la question
 					echo "<p>";
 				}
-				else { //on écrit la réponse courante
-					echo $donnees['Intitule_r'];
-					if ($donnees['Type'] == 1) { //ajouter un bouton radio
-						echo "<input type=\"radio\" name=\"".$donnees['Num_q']."\" value=\"".$donnees['rep_id']."\"";
-					}
-					else {
-						echo "<input type=\"checkbox\" name=\"".$donnees['Num_q']."\" value=\"".$donnees['rep_id']."\"";
-					}
 
-					echo "<br/>";
+				echo $donnees['Intitule_r']; //affichage de la réponse
+				if ($donnees['Type'] == 1) { //ajouter un bouton radio
+					echo "<input type=\"radio\" name=\"".$donnees['Num_q']."\" value=\"".$donnees['rep_id']."\"";
+				}
+				else {
+					echo "<input type=\"checkbox\" name=\"".$donnees['Num_q']."+".$num_rep."\" value=\"".$donnees['rep_id']."\"";
+					$num_rep++;
 				}
 
+				echo "<br/>";
+			
+			}while($donnees = $reponse->fetch());
 
-			}
 			echo "</p>";
+
+			echo "<input type=\"hidden\" name=\"Nbq\" value=\"".$nbq."\"/>"; //nombre de questions
 
 			echo "<input type=\"submit\" value=\"Soumettre le questionnaire\" name=\"submit\"/>";
 

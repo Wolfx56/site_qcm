@@ -37,6 +37,11 @@
 
 	<body>
 		<div id="banniere_haut">
+			<div id="logo">
+				<a href="http://localhost/site_qcm/index.php">
+					<img src="../images/wolf.jpg" alt="logo_loup" id="mon_logo"/>
+				</a>
+			</div>
 			<div id="div_lien">
 			</div>
 		</div>
