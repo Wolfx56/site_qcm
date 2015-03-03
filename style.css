@@ -107,6 +107,7 @@ input {
 	color: #FFFFFF;
 }
 
+/*
 #menu
 {
 	border: solid 2px blue;
@@ -118,7 +119,7 @@ input {
 	border-right: none;
 	border-left: none;
 }
-
+*/
 body
 {
 	margin: 0;
@@ -152,3 +153,43 @@ div
 	font-size: 15pt;
 	font-weight: bold;
 }
+
+
+nav
+{  
+	border: solid 2px blue;
+	background-color: #FFFFFF;
+	width: 100%;
+	margin: auto;
+	position: relative;
+	top: 38px;
+	border-right: none;
+	border-left: none;
+    display: inline-block;
+    text-align: left;
+}
+
+nav ul
+{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+nav li
+{
+    display: inline;
+    margin-right: 400px;
+    margin-left: 20px;
+    margin-bottom: none;
+}
+/*
+nav a
+{
+    font-size: 1.3em;
+    color: white;
+    font-weight: bold;
+    padding-bottom: 0px;
+    text-decoration: none;
+}
+*/

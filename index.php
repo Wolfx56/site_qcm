@@ -14,6 +14,14 @@
 
 		$_SESSION['nom'] = $info['nom'];
 		$_SESSION['prenom'] = $info['prenom'];
+
+		$query = "SELECT Admin FROM identifiant WHERE Nom = \"".$_SESSION['nom']."\"";
+
+		require_once("./connexion_bd.php");
+
+		$reponse = $bdd->query($query);
+		$res = $reponse->fetch();
+		$_SESSION['Admin'] = $res['Admin'];
 		
 		header('Location: index.php');
 		exit();
@@ -60,7 +68,14 @@
 			if(isset($_SESSION['nom'])) {
 		?>
 				<nav id="menu">
-					<p>On essaye quelque chose, prions pour que ça marche</p>
+		<?php
+					echo "<br/> <p>";
+						echo "<ul>";
+							echo "<li><a href=\"http://localhost/site_qcm/site_Qcm.php\">Créer un questionnaire</a></li>";
+							echo "<li><a href=\"http://localhost/site_qcm/consultation_qcm.php\">Consulter la liste des questionnaires</a></li>"; //page a faire
+						echo "</ul>";
+					echo "</p>";
+		?>
 				</nav>
 		<?php
 			}
@@ -76,13 +91,6 @@
 					echo '<p>blabla des optiosn présentes pour les utilisateurs. Il y a deux types d\'utilisateurs : les étudiants et les professeurs. <br/>
 					Les professeurs peuvent créer des qcms, les rendrent visibles pour les élèves, <br/>
 					Les étudiants peuvent consulter leurs qcms, y répondrent et obtenir une note, voir les qcms liés aux professeurs, demander une liaison</p>';
-				
-					echo "<br/> <p>";
-						echo "<ul>";
-							echo "<li><a href=\"http://localhost/site_qcm/site_Qcm.php\">Créer un questionnaire</a></li>";
-							echo "<li><a href=\"http://localhost/site_qcm/consultation_qcm.php\">Consulter la liste des questionnaires</a></li>"; //page a faire
-						echo "</ul>";
-					echo "</p>";
 				}
 			?>
 		</div>

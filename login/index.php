@@ -2,6 +2,7 @@
 	session_start();
 
 	require_once("../fonctions.php");
+	require_once("../connexion_bd.php");
 
 	if (isset($_SESSION['url'])) {
 		$url = $_SESSION['url'];
@@ -21,8 +22,20 @@
 
 		$_SESSION['nom'] = $info['nom'];
 		$_SESSION['prenom'] = $info['prenom'];
+
+		//var_dump($_SESSION);
+		
+		$query = "SELECT Admin FROM identifiant WHERE Nom = \"".$_SESSION['nom']."\"";
+
+		//echo "$query";
+
+		$reponse = $bdd->query($query);
+		$res = $reponse->fetch();
+
+		$_SESSION['Admin'] = $res['Admin'];
 		
 		header("Location: $url");
+		exit();	
 	}
 ?>
 

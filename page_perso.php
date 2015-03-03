@@ -18,15 +18,12 @@
 		exit();
 	}
 
-	/*
-	if (isset($_GET['num_qcm'])) {
-		$_SESSION['quest'] = $_GET['num_qcm'];
-		unset($_GET['num_qcm']);
-
-		header('Location: http://localhost/site_qcm/afficher_qcm.php');
+	if (!isset($_SESSION['Admin']) || $_SESSION['Admin'] != 1) {
+		header("Location: http://localhost/site_qcm/index.php");
 		exit();
 	}
-	*/
+
+	//var_dump($_SESSION);
 
 	require_once("connexion_bd.php");
 ?>
@@ -35,7 +32,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Consultation des questionnaires</title>
+	<title>Page Perso</title>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<script type="text/javascript" src="functions.js"></script>
 </head>
@@ -51,7 +48,7 @@
 			<?php
 				$login = $_SESSION['phpCAS']['user'];
 				echo '<span class="espacement">';
-				echo "Bienvenue $_SESSION[prenom] $_SESSION[nom]";
+				echo "Bienvenue Maitre $_SESSION[prenom]";
 				echo '</span>';
 				
 				echo '<a class="lien_connexion" href="http://localhost/site_qcm/Site_Qcm.php?logout=true">Deconnexion</a>';
@@ -60,20 +57,42 @@
 	</div>
 
 	<div id="page">
+
 		<?php
-			$req_questionnaire = "SELECT Titre,Id FROM questionnaire WHERE Login = \"$login\"";
-			$reponse = $bdd->query($req_questionnaire);
-			
-			while($donnees = $reponse->fetch()) {
-				echo "<ul>";
-				echo "<li><a href=\"http://localhost/site_qcm/afficher_qcm.php?id_qcm=".$donnees['Id']."\">".$donnees['Titre']."</a></li>";
+			$query = "SELECT * FROM identifiant WHERE Nom != \"".$_SESSION['nom']."\"";
+			//echo "$query";
+			$requete = $bdd->query($query);
 
-				echo "</ul>";
+			echo "<table>";
+			echo "<thead>";
+		    	echo "<tr>";
+           			echo"<th>Nom</th>";
+           			echo "<th>Prenom</th>";
+           			echo "<th>Statut</th>";
+ 					echo "<th>Admin</th>";
+ 					echo "<th>Supprimer</th>";
+				echo "</tr>";
+   			echo "</thead>";
+
+   			echo "<tbody>";
+
+			while ($donnee = $requete->fetch()) {
+				//var_dump($donnee);
+				echo "<tr>";
+					echo "<td>".$donnee['Nom']."</td>";
+					echo "<td>".$donnee['Prenom']."</td>";
+					echo "<td>".$donnee['Statut']."</td>";
+					if ($donnee['Admin'] == 1)
+						echo "<td>X</td>";
+					else 
+						echo "<td></td>";
+					echo "<td><img src=\"./images/del.png\"/ style=\"width:20px; height:20px;\"></td>";
+				echo "</tr>";	
 			}
-			
-			$reponse->closeCursor();
-		?>
+			echo "</tbody>";
+			echo "</table>";
 
+		?>	
 	</div>
 </body>
 
