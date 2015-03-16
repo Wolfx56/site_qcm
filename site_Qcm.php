@@ -17,6 +17,12 @@
 		exit();
 	}
 
+	if (!isset($_SESSION['Statut']) || $_SESSION['Statut'] != "Professeur") {
+		$_SESSION['url'] = "http://localhost".$_SERVER['REQUEST_URI']; // récupère l'adresse courante
+		header("Location: http://localhost/site_qcm");
+		exit();
+	}
+
 ?>
 
 <!--
@@ -83,7 +89,33 @@
 
 		<div id="page">
 			<form method="POST" action="traitement.php" name="questionnaire"  onsubmit="return soumettre_form()">
-				<input type="text" placeholder="Titre" name="titre" class="champ_titre" required/>
+
+				<table id="tete">
+					<tr>
+						<td>
+							<input type="text" placeholder="Titre" name="titre" class="champ_titre" required/>
+						</td>
+						<td>
+							<div id="options">
+								<table>
+									<tr>
+										<td>Temps pour faire le questionnaire : </td>  <td><input type="number" name="time" value="" min="1" step="1"/> min </td>
+									</tr>
+									<tr>
+										<td>Mélanger les questions : </td>  <td><input type="checkbox" name="mix" value="mix"/></td>
+									</tr>
+									<tr>
+										<td>Pénaliter de mauvaise réponse : </td>  <td><input type="number" name="pen" value="0" min="0" step="0.5"/> pt(s) </td>
+									</tr>
+									<tr>
+										<td> Réponse unique au questionnaire : </td>  <td><input type="checkbox" name="unique" value="uniquej"/> </td>
+									</tr>
+
+								</table>
+							</div>
+						</td>
+					</tr>
+				</table>
 
 				<input type="button" onclick="javascript:ajouter_question(j,this)" value="Ajouter question unique" class = "ajout_q" id="ajout_q_u"/>
 				<input type="button" onclick="javascript:ajouter_question_mult(j,this)" value="Ajouter question multiple" class = "ajout_q" id="ajout_q_m" />

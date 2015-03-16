@@ -39,7 +39,7 @@ function ajouter_question_mult(num_q,element) {
 
 	//bouton supprimer
 	var sup = document.createElement("input");
-	sup.value = "supprimer un champ";
+	sup.value = "";
 	sup.className = "button_supp_q";
 	sup.type = "button";
 	// Ajout de l'événement onclick
@@ -95,7 +95,7 @@ function ajouter_question(num_q,element) {
 
 	//bouton supprimer
 	var sup = document.createElement("input");
-	sup.value = "supprimer un champ";
+	sup.value = "";
 	sup.type = "button";
 	sup.className = "button_supp_q";
 	// Ajout de l'événement onclick
@@ -153,7 +153,7 @@ function ajouter_reponse(num_q,num_el,element) {
 
 
 	var sup = document.createElement("input");
-	sup.value = "supprimer un champ";
+	sup.value = "";
 	sup.type = "button";
 	sup.className = "button_supp_r";
 	// Ajout de l'événement onclick
@@ -208,7 +208,7 @@ function ajouter_reponse_mult(num_q,num_el,element) {
 
 
 	var sup = document.createElement("input");
-	sup.value = "supprimer un champ";
+	sup.value = "";
 	sup.type = "button";
 	sup.className = "button_supp_r";
 	// Ajout de l'événement onclick

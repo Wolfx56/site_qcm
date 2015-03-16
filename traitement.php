@@ -5,12 +5,18 @@
 	require_once("connexion_bd.php");
 
 	// vérifier que le questionnaire n'existe pas déja
+	
 	$req_nb_quest = " SELECT Count(*) FROM questionnaire WHERE Titre = 'Mon deuxieme questionnaire' AND Login = 'bourrat02' ";
 	$rep_nb_quest = $bdd->query($req_nb_quest);
 	$nb_quest = $rep_nb_quest ->fetch();
 	$rep_nb_quest->closeCursor();
+	
 
-	if (isset($_POST['val']) && $nb_quest[0] == 0) {
+	// var_dump($_POST);
+	// exit();
+
+
+	if (isset($_POST['val'])) {
 
 		$cpt = 1; //compteur de question
 		$cpt_2 = 1; //compteur de num réponses possible
@@ -19,11 +25,37 @@
 		$nbq = 0; //compteur de questions trouvées
 		$max = count($_POST); //max recoit le nombre d'éléments dans le tableau
 
+		$unique = 0;
+		$mix = 0;
+		$time = 0;
+
+		// echo "Avant options : $max ";
+
+		/* --- options --- */
+		if (isset($_POST['unique'])) {
+			$max = $max - 1; // on enleve les checkbox en option
+			$unique = 1;
+		}
+
+		if (isset($_POST['mix'])) {
+			$max = $max - 1; // on enleve les checkbox en option
+			$mix = 1;
+		}
+
+		if ($_POST['time'] != "")
+			$time = $_POST['time'];
+
+		$pen = $_POST['pen'];
+
+		$max = $max - 2; //on enleve le time et le pen
+
+		// echo "Avant boucle : $max";
+
 		$titre_qcm = $_POST['titre'];
 		$login = $_SESSION['phpCAS']['user'];
 
 		//ajout du questionnaire dans la base de donnée
-		$bdd->exec("INSERT INTO questionnaire(Id,Titre,Login) VALUES('',\"$titre_qcm\", \"$login\")");
+		$bdd->exec("INSERT INTO questionnaire(Id,Titre,Login,Temps,Melange,Penalite,MonUnique) VALUES('',\"$titre_qcm\", \"$login\", \"$time\", \"$mix\", \"$pen\", \"$unique\")");
 
 		// récupération du numéro de questionnaire
 		$req_quest = "SELECT Id FROM questionnaire WHERE Titre = \"$titre_qcm\" AND Login = \"$login\"";
@@ -40,6 +72,9 @@
 
 		/*Tant qu'on a pas pris en compte tous les éléments*/
 		while ($cpt_element < $max - 2) { //on enleve le titre et le bouton envoyer
+
+			echo "$cpt_element";
+			echo "<br/>";
 
 			$expr = "titreq".$cpt; //question définit comme ceci
 
@@ -165,9 +200,10 @@
 
 		<div id="page">
 			<?php
-				echo "<p> Enregistrement Réussi </p>";
-
-
+				echo "<h4> Enregistrement Réussi </h4>";
+				echo "<p>Retour à la page d'accueil : <a href=\"index.php\">Cliquer ici</a> </p> <br/>" ;
+				echo "<p>Retour à la page de création de questionnaires : <a href=\"site_Qcm.php\">Cliquer ici</a> </p> <br/>";
+				echo "<p>Retour à la page de consultation de questionnaires : <a href=\"consultation_qcm.php\">Cliquer ici</a> </p>";
 			?>
 		</div>
 

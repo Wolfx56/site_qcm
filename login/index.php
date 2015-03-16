@@ -25,7 +25,7 @@
 
 		//var_dump($_SESSION);
 		
-		$query = "SELECT Admin FROM identifiant WHERE Nom = \"".$_SESSION['nom']."\"";
+		$query = "SELECT Admin,Statut FROM identifiant WHERE Nom = \"".$_SESSION['nom']."\"";
 
 		//echo "$query";
 
@@ -33,6 +33,7 @@
 		$res = $reponse->fetch();
 
 		$_SESSION['Admin'] = $res['Admin'];
+		$_SESSION['Statut'] = $res['Statut'];
 		
 		header("Location: $url");
 		exit();	

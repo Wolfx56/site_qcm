@@ -1,10 +1,6 @@
 <?php
 	session_start();
 
-	//var_dump($_SESSION);
-	//var_dump($_GET);
-
-
 	if (isset($_SESSION['url'])) {
 		unset($_SESSION['url']);
 	}
@@ -22,21 +18,9 @@
 		exit();
 	}
 
-	if (!isset($_SESSION['Statut']) || $_SESSION['Statut'] != "Professeur") {
-		$_SESSION['url'] = "http://localhost".$_SERVER['REQUEST_URI']; // récupère l'adresse courante
-		header("Location: http://localhost/site_qcm");
-		exit();
-	}
+	require_once("../connexion_bd.php");
 
-	/*
-	if (!isset($_SESSION['quest'])) {
-		$erreur = "Une erreur est survenue, le questionnaire n'a pas pu être affiché";
-	}
-	*/
-
-	require_once("connexion_bd.php");
-
-	if (isset($_POST['submit'])) {
+	if (isset($_POST['submit'])) { //le questionnaire a été répondu
 		//unset($_SESSION['quest']);
 		var_dump($_POST);
 
@@ -120,7 +104,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Affichage d'un questionnaire</title>
-	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="stylesheet" type="text/css" href="../style.css"/>
 	<script type="text/javascript" src="functions.js"></script>
 </head>
 
@@ -128,7 +112,7 @@
 	<div id="banniere_haut">
 		<div id="logo">
 			<a href="http://localhost/site_qcm/index.php">
-				<img src="images/wolf.jpg" alt="logo_loup" id="mon_logo"/>
+				<img src="../images/wolf.jpg" alt="logo_loup" id="mon_logo"/>
 			</a>
 		</div>
 		<div id="div_lien">
@@ -146,21 +130,12 @@
 
 	<div id="page">
 		<?php
-			if (isset($erreur)) {
-				echo "<div id=\"erreur\">";
-					echo "$erreur";
-					echo "<br/>";
-					echo "<a href=\"http://localhost/site_qcm/consultation_qcm.php\">Retour a la page des questionnaire</a>";
-				echo "</div>";
-				exit();
-			}
-
-			if (isset($_GET['id_qcm'])) {
-				$code = $_GET['id_qcm'];
-				unset($_GET['id_qcm']);
+			if (isset($_GET['q'])) {
+				$code = $_GET['q'];
+				unset($_GET['q']);
 
 				//requete, recherche du questionnaire
-				$requete = "SELECT questionnaire.Id,Titre,Intitule,Intitule_r,Type,question.Num_q,reponse.Id as rep_id FROM questionnaire NATURAL JOIN question JOIN reponse ON question.Num_q = reponse.Num_q WHERE questionnaire.Id = \"$code\" ORDER BY questionnaire.Id";
+				$requete = "SELECT questionnaire.Id,Titre,Intitule,Intitule_r,Type,question.Num_q,reponse.Id as rep_id FROM questionnaire NATURAL JOIN question JOIN reponse ON question.Num_q = reponse.Num_q WHERE questionnaire.Code = \"$code\" ORDER BY questionnaire.Id";
 				$reponse = $bdd->query($requete);
 
 				//$ecrire_titre = 1;
@@ -217,18 +192,18 @@
 
 					echo "<input type=\"hidden\" name=\"Nbq\" value=\"".$nbq."\"/>"; //nombre de questions
 
-					// 	echo "<input type=\"submit\" value=\"Soumettre le questionnaire\" name=\"submit\"/>";
+					echo "<input type=\"submit\" value=\"Soumettre le questionnaire\" name=\"submit\"/>";
 
 					echo "</form>";
 
 					$reponse->closeCursor();
 				}
 				else { 
-					header('Location: consultation_qcm.php');
+					header('Location: http://localhost/site_qcm');
 				}
-			} //end isset $_GET idqcm
+			} //end isset $_GET q
 			else {
-				header('Location: consultation_qcm.php');
+				header('Location: http://localhost/site_qcm');
 			}
 		?>
 

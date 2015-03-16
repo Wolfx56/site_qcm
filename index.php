@@ -15,13 +15,15 @@
 		$_SESSION['nom'] = $info['nom'];
 		$_SESSION['prenom'] = $info['prenom'];
 
-		$query = "SELECT Admin FROM identifiant WHERE Nom = \"".$_SESSION['nom']."\"";
+		$query = "SELECT Admin,Statut FROM identifiant WHERE Nom = \"".$_SESSION['nom']."\"";
 
 		require_once("./connexion_bd.php");
 
 		$reponse = $bdd->query($query);
 		$res = $reponse->fetch();
+		var_dump($res);
 		$_SESSION['Admin'] = $res['Admin'];
+		$_SESSION['Statut'] = $res['Statut'];
 		
 		header('Location: index.php');
 		exit();
@@ -53,7 +55,7 @@
 
 						$login = $_SESSION['phpCAS']['user'];
 						echo '<span class="espacement">';
-						echo "Bienvenue $_SESSION[prenom] $_SESSION[nom]";
+						echo "Bienvenue ".strtolower($_SESSION['prenom'])." $_SESSION[nom]";
 						echo '</span>';
 
 						authentification($login);
@@ -62,19 +64,19 @@
 					}
 				?>
 			</div>
-		</div>
+		</div> <!-- end div banniere_haut -->
 
 		<?php
 			if(isset($_SESSION['nom'])) {
 		?>
 				<nav id="menu">
-		<?php
-					echo "<br/> <p>";
+			<?php
+					if (isset($_SESSION['Statut']) && $_SESSION['Statut'] == "Professeur") {
 						echo "<ul>";
 							echo "<li><a href=\"http://localhost/site_qcm/site_Qcm.php\">Créer un questionnaire</a></li>";
 							echo "<li><a href=\"http://localhost/site_qcm/consultation_qcm.php\">Consulter la liste des questionnaires</a></li>"; //page a faire
 						echo "</ul>";
-					echo "</p>";
+					}
 		?>
 				</nav>
 		<?php
@@ -88,6 +90,7 @@
 					echo '<p>Blabla de page d\'acceuil</p>';
 				}
 				else {
+					var_dump($_SESSION);
 					echo '<p>blabla des optiosn présentes pour les utilisateurs. Il y a deux types d\'utilisateurs : les étudiants et les professeurs. <br/>
 					Les professeurs peuvent créer des qcms, les rendrent visibles pour les élèves, <br/>
 					Les étudiants peuvent consulter leurs qcms, y répondrent et obtenir une note, voir les qcms liés aux professeurs, demander une liaison</p>';

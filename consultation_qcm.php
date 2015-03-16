@@ -18,6 +18,12 @@
 		exit();
 	}
 
+	if (!isset($_SESSION['Statut']) || $_SESSION['Statut'] != "Professeur") {
+		$_SESSION['url'] = "http://localhost".$_SERVER['REQUEST_URI']; // récupère l'adresse courante
+		header("Location: http://localhost/site_qcm");
+		exit();
+	}
+
 	/*
 	if (isset($_GET['num_qcm'])) {
 		$_SESSION['quest'] = $_GET['num_qcm'];
@@ -60,16 +66,42 @@
 	</div>
 
 	<div id="page">
+		<h2>Liste de vos questionnaires</h2>
 		<?php
-			$req_questionnaire = "SELECT Titre,Id FROM questionnaire WHERE Login = \"$login\"";
+			$req_questionnaire = "SELECT Titre,Id,Code FROM questionnaire WHERE Login = \"$login\"";
 			$reponse = $bdd->query($req_questionnaire);
-			
-			while($donnees = $reponse->fetch()) {
-				echo "<ul>";
-				echo "<li><a href=\"http://localhost/site_qcm/afficher_qcm.php?id_qcm=".$donnees['Id']."\">".$donnees['Titre']."</a></li>";
 
-				echo "</ul>";
+			echo "<ul class = \"liste_qcm\">";
+
+			while($donnees = $reponse->fetch()) {
+				echo "<li>";
+					echo "<h3>".$donnees['Titre']."</h3>";
+					echo "<p>";
+						echo "<table>";
+							echo "<tr>";
+								echo "<td>";
+									echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/afficher_qcm.php?id_qcm=".$donnees['Id']."';\">Consulter</button>";
+								echo "</td>";
+								echo "<td>";
+									echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/modifier_qcm.php?id_qcm=".$donnees['Id']."';\">Modifier</button>";
+								echo "</td>";
+								echo "<td>";
+									echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/consultation_qcm.php?id_supp=".$donnees['Id']."';\">Supprimer</button>";
+								echo "</td>";
+								echo "<td>";
+									echo "<button type=\"button\" onClick=\"copy(document.getElementById('CopyPaste').value);\">Partager</button>";
+								echo "</td>";							
+							echo "</tr>";
+						echo "</table>";
+						echo "<input id=\"CopyPaste\" class=\"CopyPaste\" type=\"text\" value = \"http://localhost/site_qcm/questionnaire/?q=".$donnees['Code']."\" disabled />";
+
+					echo "</p>";
+
+				echo "</li>";
+
 			}
+
+			echo "</ul>";
 			
 			$reponse->closeCursor();
 		?>
