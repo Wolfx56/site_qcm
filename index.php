@@ -55,7 +55,7 @@
 
 						$login = $_SESSION['phpCAS']['user'];
 						echo '<span class="espacement">';
-						echo "Bienvenue ".strtolower($_SESSION['prenom'])." $_SESSION[nom]";
+						echo "Bienvenue ".ucfirst (strtolower($_SESSION['prenom']))." $_SESSION[nom]";
 						echo '</span>';
 
 						authentification($login);

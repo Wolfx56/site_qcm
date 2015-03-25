@@ -78,7 +78,7 @@
 
 					$login = $_SESSION['phpCAS']['user'];
 					echo '<span class="espacement">';
-					echo "Bienvenue $_SESSION[prenom] $_SESSION[nom]";
+					echo "Bienvenue ".ucfirst (strtolower($_SESSION['prenom']))." $_SESSION[nom]";
 					echo '</span>';
 					
 					echo '<a class="lien_connexion" href="http://localhost/site_qcm/Site_Qcm.php?logout=true">Deconnexion</a>';

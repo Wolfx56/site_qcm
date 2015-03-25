@@ -1,6 +1,8 @@
 <?php
 	session_start();
 
+	require_once("connexion_bd.php");
+
 	if (isset($_SESSION['url'])) {
 		unset($_SESSION['url']);
 	}
@@ -21,6 +23,34 @@
 	if (!isset($_SESSION['Statut']) || $_SESSION['Statut'] != "Professeur") {
 		$_SESSION['url'] = "http://localhost".$_SERVER['REQUEST_URI']; // récupère l'adresse courante
 		header("Location: http://localhost/site_qcm");
+		exit();
+	}
+
+	if (isset($_GET['id_supp']) && $_GET['id_supp'] != "") {
+		$val_q = $_GET['id_supp'];
+
+		//recherche de toutes les réponses au questionnaire passé en paramètre
+		$requete_reponse = "SELECT * FROM reponse JOIN question ON question.Num_q = reponse.Num_q WHERE question.Id = \"$val_q\""; 
+
+		$reponse = $bdd->query($requete_reponse);
+
+		while ($donnees = $reponse->fetch()) {
+
+			var_dump($donnees);
+
+			$remove_rep = "DELETE FROM reponse WHERE reponse.Id = \"$donnees[0]\"";
+
+			$exec = $bdd->query($remove_rep);
+		}
+
+		$remove_question = "DELETE FROM question WHERE question.Id = \"$val_q\"";
+		$exec = $bdd->query($remove_question);
+
+
+		$remove = "DELETE FROM questionnaire WHERE questionnaire.Id = \"$val_q\"";		
+		$exec = $bdd->query($remove);
+
+		header('Location: consultation_qcm.php');
 		exit();
 	}
 
@@ -57,7 +87,7 @@
 			<?php
 				$login = $_SESSION['phpCAS']['user'];
 				echo '<span class="espacement">';
-				echo "Bienvenue $_SESSION[prenom] $_SESSION[nom]";
+				echo "Bienvenue ".ucfirst (strtolower($_SESSION['prenom']))." $_SESSION[nom]";
 				echo '</span>';
 				
 				echo '<a class="lien_connexion" href="http://localhost/site_qcm/Site_Qcm.php?logout=true">Deconnexion</a>';
@@ -80,16 +110,16 @@
 						echo "<table>";
 							echo "<tr>";
 								echo "<td>";
-									echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/afficher_qcm.php?id_qcm=".$donnees['Id']."';\">Consulter</button>";
+		/*affi OK*/					echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/afficher_qcm.php?id_qcm=".$donnees['Id']."';\">Consulter</button>";
 								echo "</td>";
 								echo "<td>";
-									echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/modifier_qcm.php?id_qcm=".$donnees['Id']."';\">Modifier</button>";
+		/*modi*/					echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/modifier_qcm.php?id_qcm=".$donnees['Id']."';\">Modifier</button>";
 								echo "</td>";
 								echo "<td>";
-									echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/consultation_qcm.php?id_supp=".$donnees['Id']."';\">Supprimer</button>";
+		/*supp OK*/					echo "<button type=\"button\" onClick=\"window.location='http://localhost/site_qcm/consultation_qcm.php?id_supp=".$donnees['Id']."';\">Supprimer</button>";
 								echo "</td>";
 								echo "<td>";
-									echo "<button type=\"button\" onClick=\"copy(document.getElementById('CopyPaste').value);\">Partager</button>";
+		/*hidd*/					echo "<button type=\"button\" onClick=\"copy(document.getElementById('CopyPaste').value);\">Partager</button>";
 								echo "</td>";							
 							echo "</tr>";
 						echo "</table>";
